@@ -1,0 +1,20 @@
+{
+  "name": "wild-horizon",
+  "version": "1.0.0",
+  "description": "A simple node.js app",
+  "homepage": "https://github.com/EnvoyX/wild-horizon#readme",
+  "bugs": {
+    "url": "https://github.com/EnvoyX/wild-horizon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnvoyX/wild-horizon.git"
+  },
+  "license": "ISC",
+  "author": "Envoy",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
