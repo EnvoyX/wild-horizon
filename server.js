@@ -1,6 +1,7 @@
 import http from "node:http";
 import {
   getAllContinents,
+  getAllCountries,
   getContinent,
   getCountry,
   getDataByQueryParams,
@@ -28,6 +29,8 @@ const server = http.createServer(async (req, res) => {
     sendJSONResponse(res, 200, filteredData);
   } else if (req.url === "/api/continents" && req.method === "GET") {
     await getAllContinents(req, res, destinations);
+  } else if (req.url === "/api/countries" && req.method === "GET") {
+    await getAllCountries(req, res, destinations);
   } else if (req.url.startsWith("/api/continent") && req.method === "GET") {
     await getContinent(req, res, destinations);
   } else if (req.url.startsWith("/api/country") && req.method === "GET") {
