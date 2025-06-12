@@ -1,10 +1,11 @@
 import http from "node:http";
 import {
   getAllContinents,
-  getAllData,
   getContinent,
   getCountry,
+  getDataByQueryParams,
   handleRouteError,
+  sendJSONResponse,
 } from "./utils/utils.js";
 import { getDataFromDB } from "./database/db.js";
 
@@ -12,8 +13,19 @@ const PORT = 8000;
 
 const server = http.createServer(async (req, res) => {
   const destinations = await getDataFromDB();
-  if (req.url === "/api" && req.method === "GET") {
-    await getAllData(req, res, destinations);
+
+  const urlObj = new URL(req.url, `http://${req.headers.host}`);
+
+  const queryObj = Object.fromEntries(urlObj.searchParams);
+
+  console.log(queryObj);
+
+  if (urlObj.pathname === "/api" && req.method === "GET") {
+    let filteredData = destinations;
+
+    filteredData = getDataByQueryParams(filteredData, queryObj);
+
+    sendJSONResponse(res, 200, filteredData);
   } else if (req.url === "/api/continents" && req.method === "GET") {
     await getAllContinents(req, res, destinations);
   } else if (req.url.startsWith("/api/continent") && req.method === "GET") {

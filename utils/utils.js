@@ -1,8 +1,29 @@
+export const sendJSONResponse = (res, statusCode, payload) => {
+  res.setHeader("Content-Type", "application/json");
+  res.statusCode = statusCode;
+  res.end(JSON.stringify(payload));
+};
+
 export const getDataByPathParams = (datas, locationType, locationName) => {
   return datas.filter((data) => {
-    return data[locationType].toUpperCase() === locationName.toUpperCase();
+    return data[locationType].toLowerCase() === locationName.toLowerCase();
   });
 };
+
+export const getDataByQueryParams = (datas, queryParams) => {
+  if (!queryParams) {
+    return datas;
+  }
+  return datas.filter((data) => {
+    return Object.keys(queryParams).every((key) => {
+      return (
+        data[key].toString().toLowerCase() ===
+        queryParams[key].toString().toLowerCase()
+      );
+    });
+  });
+};
+
 export const getAllData = async (req, res, destinations) => {
   console.log(req.url);
   res.setHeader("Content-Type", "application/json");
