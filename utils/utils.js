@@ -16,7 +16,6 @@ export const getDataByPathParams = (datas, locationType, locationName) => {
 };
 
 export const getAllData = async (req, res, destinations) => {
-  //   console.log(req.url);
   sendJSONResponse(res, 200, destinations);
 };
 

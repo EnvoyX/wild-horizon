@@ -19,8 +19,6 @@ const server = http.createServer(async (req, res) => {
 
   const queryObj = Object.fromEntries(urlObj.searchParams);
 
-  console.log(queryObj);
-
   if (urlObj.pathname === "/api" && req.method === "GET") {
     let filteredData = destinations;
 
